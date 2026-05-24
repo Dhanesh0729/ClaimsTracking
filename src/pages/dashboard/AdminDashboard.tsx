@@ -92,7 +92,7 @@ export function AdminDashboard() {
               <SelectValue placeholder="Choose a user to drill into…" />
             </SelectTrigger>
             <SelectContent>
-              {users.map((u) => (
+              {users.map((u: any) => (
                 <SelectItem key={u._id} value={u._id}>
                   {u.name} ({u.unique_code}) — {u.role}
                 </SelectItem>
@@ -161,7 +161,7 @@ export function AdminDashboard() {
                         innerRadius={45}
                         outerRadius={75}
                       >
-                        {analytics.platforms.map((_, i) => (
+                        {analytics.platforms.map((_: any, i: number) => (
                           <Cell
                             key={i}
                             fill={
@@ -202,7 +202,7 @@ export function AdminDashboard() {
                       <YAxis fontSize={10} />
                       <Tooltip formatter={(v: number) => formatINR(v)} />
                       <Bar dataKey="total">
-                        {analytics.categories.map((c, i) => (
+                        {analytics.categories.map((c: any, i: number) => (
                           <Cell
                             key={i}
                             fill={
@@ -234,7 +234,7 @@ export function AdminDashboard() {
                   <div className="mt-3">
                     <div className="text-xs font-semibold mb-1">Top editors</div>
                     <ul className="text-xs space-y-1">
-                      {analytics.topEditors.map((e) => (
+                      {analytics.topEditors.map((e: any) => (
                         <li key={e.name} className="flex justify-between">
                           <span>{e.name}</span>
                           <span className="font-mono">{e.count}</span>
@@ -268,7 +268,7 @@ export function AdminDashboard() {
                     </tr>
                   </thead>
                   <tbody>
-                    {budgetUtil.map((b) => {
+                    {budgetUtil.map((b: any) => {
                       let color = "bg-success";
                       if (b.percent >= 100) color = "bg-danger";
                       else if (b.percent >= 80) color = "bg-amber";

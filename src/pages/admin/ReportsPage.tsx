@@ -23,7 +23,7 @@ export function AdminReportsPage() {
   const users = useQuery(api.users.getAll);
   const [userId, setUserId] = useState<string>("");
   const target = useMemo(
-    () => (users ?? []).find((u) => u._id === userId) as Doc<"users"> | undefined,
+    () => (users ?? []).find((u: any) => u._id === userId) as Doc<"users"> | undefined,
     [users, userId],
   );
 
@@ -97,7 +97,7 @@ export function AdminReportsPage() {
           <SelectValue placeholder="Choose a user..." />
         </SelectTrigger>
         <SelectContent>
-          {(users ?? []).map((u) => (
+          {(users ?? []).map((u: any) => (
             <SelectItem key={u._id} value={u._id}>
               {u.name} ({u.unique_code}) — {u.role}
             </SelectItem>

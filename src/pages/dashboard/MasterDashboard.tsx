@@ -71,7 +71,7 @@ export function MasterDashboard() {
           </SelectTrigger>
           <SelectContent>
             <SelectItem value="__none__">Overview (all users)</SelectItem>
-            {assignedUsers.map((u) => (
+            {assignedUsers.map((u: any) => (
               <SelectItem key={u._id} value={u._id}>
                 {u.name} ({u.unique_code})
               </SelectItem>
@@ -161,7 +161,7 @@ export function MasterDashboard() {
                         innerRadius={45}
                         outerRadius={75}
                       >
-                        {analytics.categories.map((c, i) => (
+                        {analytics.categories.map((c: any, i: number) => (
                           <Cell
                             key={i}
                             fill={

@@ -124,7 +124,7 @@ export function PurchaseDetailPage() {
             <div className="text-sm text-muted-foreground">No files attached</div>
           ) : (
             <div className="space-y-2">
-              {purchase.bill_files.map((f, idx) => (
+              {purchase.bill_files.map((f: any, idx: number) => (
                 <div
                   key={idx}
                   className="flex items-center gap-3 p-2 rounded border"
@@ -164,7 +164,7 @@ export function PurchaseDetailPage() {
             <div className="text-sm text-muted-foreground">No audit entries</div>
           ) : (
             <ol className="relative border-l-2 border-border space-y-3 pl-4">
-              {auditTrail.map((a) => (
+              {auditTrail.map((a: any) => (
                 <li key={a._id} className="text-sm">
                   <div className="absolute -left-[5px] mt-1 h-2 w-2 rounded-full bg-navy" />
                   <div className="font-mono text-xs text-muted-foreground">

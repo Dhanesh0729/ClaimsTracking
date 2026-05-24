@@ -60,14 +60,14 @@ export function UsersPage() {
   const budgets = useQuery(api.budgets.getAllBudgets, { month, year });
 
   const masters = useMemo(
-    () => (users ?? []).filter((u) => u.role === "master"),
+    () => (users ?? []).filter((u: any) => u.role === "master"),
     [users],
   );
   const filtered = useMemo(() => {
     const q = search.toLowerCase().trim();
     if (!q) return users ?? [];
     return (users ?? []).filter(
-      (u) =>
+      (u: any) =>
         u.name.toLowerCase().includes(q) ||
         u.email.toLowerCase().includes(q) ||
         u.unique_code.toLowerCase().includes(q),
@@ -76,7 +76,7 @@ export function UsersPage() {
 
   if (!users || !me) return <SkeletonTable />;
 
-  const budgetByUser = new Map(budgets?.map((b) => [b.user_id, b]) ?? []);
+  const budgetByUser = new Map<string, any>(budgets?.map((b: any) => [b.user_id, b]) ?? []);
 
   const canEditRole = (target: Doc<"users">): boolean => {
     if (target.role === "super_admin") return false;
@@ -135,14 +135,14 @@ export function UsersPage() {
   };
 
   const exportRegistry = () => {
-    const data = users.map((u) => ({
+    const data = users.map((u: any) => ({
       Name: u.name,
       Email: u.email,
       Mobile: u.mobile,
       Code: u.unique_code,
       Role: u.role,
       AssignedMaster:
-        users.find((x) => x._id === u.assigned_master_id)?.name ?? "",
+        users.find((x: any) => x._id === u.assigned_master_id)?.name ?? "",
       JoinedOn: formatIST(u.created_at),
     }));
     const ws = XLSX.utils.json_to_sheet(data);
@@ -211,7 +211,7 @@ export function UsersPage() {
                 </tr>
               </thead>
               <tbody>
-                {requests.map((r) => (
+                {requests.map((r: any) => (
                   <tr key={r._id} className="border-t">
                     <td className="p-2">{r.requester_name}</td>
                     <td className="p-2 font-mono text-xs">
@@ -281,7 +281,7 @@ export function UsersPage() {
             </tr>
           </thead>
           <tbody>
-            {filtered.map((u) => {
+            {filtered.map((u: any) => {
               const editable = canEditRole(u);
               const b = budgetByUser.get(u._id);
               return (
@@ -328,7 +328,7 @@ export function UsersPage() {
                         </SelectTrigger>
                         <SelectContent>
                           <SelectItem value="__none__">— None —</SelectItem>
-                          {masters.map((m) => (
+                          {masters.map((m: any) => (
                             <SelectItem key={m._id} value={m._id}>
                               {m.name}
                             </SelectItem>

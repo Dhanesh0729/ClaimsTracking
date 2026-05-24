@@ -150,7 +150,7 @@ export function ApprovalsPage() {
           newStatus: "rejected",
           note: rejectNote.trim(),
         });
-        const failed = res.filter((r) => !r.ok);
+        const failed = res.filter((r: any) => !r.ok);
         toast.success(`Rejected ${res.length - failed.length}/${res.length}`);
         if (failed.length) {
           toast.error(`${failed.length} failed (conflicts or errors)`);
@@ -173,7 +173,7 @@ export function ApprovalsPage() {
         purchaseIds: Array.from(selected) as Id<"purchases">[],
         newStatus: "approved",
       });
-      const failed = res.filter((r) => !r.ok);
+      const failed = res.filter((r: any) => !r.ok);
       toast.success(`Approved ${res.length - failed.length}/${res.length}`);
       if (failed.length) {
         toast.error(`${failed.length} conflicts skipped`);
@@ -428,7 +428,7 @@ export function ApprovalsPage() {
                   Files ({detail.bill_files.length})
                 </div>
                 <div className="space-y-1">
-                  {detail.bill_files.map((f, i) => (
+                  {detail.bill_files.map((f: any, i: number) => (
                     <a
                       key={i}
                       href={f.convexUrl}

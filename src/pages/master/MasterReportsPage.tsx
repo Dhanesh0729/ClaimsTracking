@@ -23,7 +23,7 @@ export function MasterReportsPage() {
   const assigned = useQuery(api.users.getMyAssignedUsers);
   const [userId, setUserId] = useState<string>("");
   const target = useMemo(
-    () => (assigned ?? []).find((u) => u._id === userId) as Doc<"users"> | undefined,
+    () => (assigned ?? []).find((u: any) => u._id === userId) as Doc<"users"> | undefined,
     [assigned, userId],
   );
 
@@ -97,7 +97,7 @@ export function MasterReportsPage() {
           <SelectValue placeholder="Choose an assigned user..." />
         </SelectTrigger>
         <SelectContent>
-          {(assigned ?? []).map((u) => (
+          {(assigned ?? []).map((u: any) => (
             <SelectItem key={u._id} value={u._id}>
               {u.name} ({u.unique_code})
             </SelectItem>
