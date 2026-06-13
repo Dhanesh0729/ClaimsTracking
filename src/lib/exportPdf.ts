@@ -3,7 +3,7 @@ import autoTable from "jspdf-autotable";
 import {
   formatIST,
   formatISTDate,
-  formatINR,
+  formatNumberINR,
   buildExportFileName,
 } from "./formatters";
 import type { ExportRow } from "./exportExcel";
@@ -64,7 +64,7 @@ export function exportToPdf({
     doc.setFontSize(8);
     doc.setTextColor(120);
     doc.text(
-      `ClaimTrack — Confidential | Page ${data.pageNumber} of ${totalPages} | Generated ${formatISTDate(Date.now())}`,
+      `ClaimTrack - Confidential | Page ${data.pageNumber} of ${totalPages} | Generated ${formatISTDate(Date.now())}`,
       pageWidth / 2,
       pageHeight - 15,
       { align: "center" },
@@ -89,7 +89,7 @@ export function exportToPdf({
   doc.text(`Unique Code: ${uniqueCode}`, 280, 60);
   doc.setFont("helvetica", "normal");
   doc.text(
-    `Period: ${formatISTDate(dates[0])} → ${formatISTDate(dates[dates.length - 1])}`,
+    `Period: ${formatISTDate(dates[0])} to ${formatISTDate(dates[dates.length - 1])}`,
     40,
     78,
   );
@@ -102,7 +102,7 @@ export function exportToPdf({
   doc.setFontSize(10);
   doc.setTextColor(15, 23, 42);
   doc.text(
-    `Total: ${rows.length} records   |   ${formatINR(totalSum)}   |   Approved: ${approvedCount}   Pending: ${pendingCount}   Rejected: ${rejectedCount}   |   Approved ₹: ${formatINR(totalApproved)}`,
+    `Total: ${rows.length} records   |   INR ${formatNumberINR(totalSum)}   |   Approved: ${approvedCount}   Pending: ${pendingCount}   Rejected: ${rejectedCount}   |   Approved INR: ${formatNumberINR(totalApproved)}`,
     pageWidth / 2,
     115,
     { align: "center" },
@@ -111,7 +111,7 @@ export function exportToPdf({
   const body = rows.map((r, idx) => [
     idx + 1,
     r.products_purchased,
-    formatINR(r.amount_spent),
+    formatNumberINR(r.amount_spent),
     r.purchase_platform,
     r.category,
     formatISTDate(r.date_of_purchase),
@@ -123,7 +123,7 @@ export function exportToPdf({
 
   autoTable(doc, {
     head: [
-      ["#", "Product", "Amount (₹)", "Platform", "Category", "Date", "Status", "Files"],
+      ["#", "Product", "Amount (INR)", "Platform", "Category", "Date", "Status", "Files"],
     ],
     body,
     startY: 140,

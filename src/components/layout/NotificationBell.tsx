@@ -53,7 +53,7 @@ export function NotificationBell() {
           </div>
         ) : (
           <div className="max-h-80 overflow-y-auto">
-            {latest.map((n) => (
+            {latest.map((n: any) => (
               <DropdownMenuItem
                 key={n._id}
                 className={cn(

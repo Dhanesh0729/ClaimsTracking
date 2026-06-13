@@ -143,7 +143,7 @@ export function UserDashboard({ userId }: { userId?: Id<"users"> } = {}) {
                     innerRadius={45}
                     outerRadius={75}
                   >
-                    {analytics.categories.map((c, i) => (
+                    {analytics.categories.map((c: any, i: number) => (
                       <Cell
                         key={i}
                         fill={
@@ -251,7 +251,7 @@ export function UserDashboard({ userId }: { userId?: Id<"users"> } = {}) {
                     </td>
                   </tr>
                 )}
-                {analytics.recent.map((p) => (
+                {analytics.recent.map((p: any) => (
                   <tr key={p._id} className="border-t">
                     <td className="py-1.5 max-w-[180px] truncate">
                       {p.products_purchased}
